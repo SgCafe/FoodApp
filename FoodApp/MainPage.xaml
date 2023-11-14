@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Shell
+    x:Class="FoodApp.MainPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:FoodApp.Views"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarBackgroundColor="#FFFFFF"
+    Shell.TabBarTitleColor="#5CB299">
+
+    <TabBar>
+        <Tab Icon="icon_home.png" Route="ProductPageShell">
+            <ShellContent ContentTemplate="{DataTemplate views:ProductPage}" />
+        </Tab>
+
+        <Tab Icon="icon_list.png" Route="ListPageShell">
+            <ShellContent ContentTemplate="{DataTemplate views:ListCategoriesPage}" />
+        </Tab>
+    </TabBar>
+
+    <ShellContent ContentTemplate="{DataTemplate views:AddCategoriesPage}" Shell.NavBarIsVisible="False" />
+
+    <ShellContent ContentTemplate="{DataTemplate views:AddItemsPage}" Shell.NavBarIsVisible="False" />
+
+    <ShellContent ContentTemplate="{DataTemplate views:EditProductPage}" Shell.NavBarIsVisible="False" />
+
+</Shell>
