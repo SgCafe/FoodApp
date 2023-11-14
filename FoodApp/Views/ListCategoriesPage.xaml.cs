@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FoodApp.Viewmodels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +13,19 @@ namespace FoodApp.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ListCategoriesPage : ContentPage
 	{
-		public ListCategoriesPage ()
-		{
-			InitializeComponent ();
-		}
-	}
+        public ListCategoriesPage()
+        {
+            InitializeComponent();
+            BindingContext = new ListViewmodel(Navigation);
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            if (BindingContext is ListViewmodel viewmodel)
+            {
+                viewmodel.ExecuteGetAllCategoriesCommand();
+            }
+        }
+    }
 }

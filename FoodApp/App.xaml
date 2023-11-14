@@ -1,8 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Application xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="FoodApp.App">
+<Application
+    x:Class="FoodApp.App"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <Application.Resources>
+        <Color x:Key="greenPale">#20B25D</Color>
+        <Color x:Key="PrimaryColor">#5CB299</Color>
+        <Color x:Key="White">#FFFFFF</Color>
+        <Color x:Key="BG">#F5F5F5</Color>
+        <Color x:Key="bgButton">#AFDACE</Color>
+        <Color x:Key="radioGray">#DFDFDF</Color>
+        <Color x:Key="unselectedRadioLabel">#868585</Color>
+        <Color x:Key="gray500">#727272</Color>
+        <Color x:Key="bgCategories">#DFDFDF</Color>
+
+        <SolidColorBrush x:Key="bgColor" Color="{StaticResource BG}" />
 
     </Application.Resources>
+
 </Application>

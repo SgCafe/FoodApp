@@ -1,12 +1,189 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="FoodApp.Views.ProductPage">
+<ContentPage
+    x:Class="FoodApp.Views.ProductPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Converter="clr-namespace:FoodApp.Resources.Converters"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    x:Name="HomePageView"
+    Background="{StaticResource bgColor}"
+    Shell.NavBarIsVisible="False">
+
+    <ContentPage.Resources>
+        <Converter:ConverterToBgColor x:Key="ConverterToBgColor" />
+    </ContentPage.Resources>
+
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Label
+                Padding="20"
+                FontFamily="Poppins"
+                FontSize="42"
+                Text="Menu"
+                TextColor="Black" />
+
+            <StackLayout
+                Margin="20,0,20,5"
+                Orientation="Horizontal"
+                VerticalOptions="Center">
+                <Label
+                    FontFamily="Poppins"
+                    FontSize="24"
+                    HorizontalOptions="StartAndExpand"
+                    Text="Categorias"
+                    TextColor="Black" />
+
+
+                <Button
+                    Padding="10,2"
+                    BackgroundColor="{StaticResource bgButton}"
+                    Command="{Binding GoToAddCategoriesCommand}"
+                    CornerRadius="20"
+                    FontSize="22"
+                    HeightRequest="10"
+                    HorizontalOptions="Center"
+                    Text="+"
+                    WidthRequest="42" />
+            </StackLayout>
+
+            <StackLayout Padding="10">
+                <CollectionView
+                    HeightRequest="50"
+                    ItemsSource="{Binding CategoriesList}"
+                    SelectedItem="{Binding SelectCategory}"
+                    SelectionMode="Single">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout HorizontalItemSpacing="15" Orientation="Horizontal" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid HorizontalOptions="Fill">
+                                <Frame
+                                    Padding="20,10"
+                                    BackgroundColor="{StaticResource radioGray}"
+                                    CornerRadius="25"
+                                    HeightRequest="25">
+                                    <Label
+                                        FontFamily="Poppins"
+                                        FontSize="16"
+                                        HorizontalOptions="Center"
+                                        Text="{Binding NameCategory}"
+                                        VerticalOptions="Center" />
+                                </Frame>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+
+            <StackLayout
+                Margin="20,0,20,5"
+                Orientation="Horizontal"
+                VerticalOptions="Center">
+                <Label
+                    FontFamily="Poppins"
+                    FontSize="24"
+                    HorizontalOptions="StartAndExpand"
+                    Text="Itens"
+                    TextColor="Black" />
+
+                <Button
+                    Padding="10,2"
+                    BackgroundColor="{StaticResource bgButton}"
+                    Command="{Binding GoToAddItemsCommand}"
+                    CornerRadius="20"
+                    FontSize="22"
+                    HeightRequest="10"
+                    HorizontalOptions="Center"
+                    Text="+"
+                    WidthRequest="42" />
+            </StackLayout>
+
+            <ScrollView>
+                <StackLayout Margin="20,0">
+                    <CollectionView
+                        ItemsSource="{Binding ItemsList}"
+                        SelectedItem="{Binding SelectedProduct}"
+                        SelectionMode="Single">
+                        <CollectionView.EmptyView>
+                            <Label
+                                FontFamily="Poppins"
+                                FontSize="16"
+                                HorizontalOptions="Start"
+                                Text="Nenhum item adicionado"
+                                TextColor="Gray" />
+                        </CollectionView.EmptyView>
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout
+                                HorizontalItemSpacing="10"
+                                Orientation="Vertical"
+                                Span="2" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid
+                                    Margin="0,0,0,20"
+                                    ColumnDefinitions="165, 165"
+                                    RowDefinitions="50,70,*,*"
+                                    RowSpacing="0">
+                                    <Frame
+                                        Grid.Row="0"
+                                        Padding="0"
+                                        xct:CornerRadiusEffect.CornerRadius="10,10,0,0"
+                                        BackgroundColor="{Binding Category.NameCategory, Converter={StaticResource ConverterToBgColor}}"
+                                        HasShadow="False">
+                                        <Image Margin="5" Source="{Binding Category.Image}" />
+                                    </Frame>
+
+                                    <StackLayout
+                                        Grid.Row="1"
+                                        Padding="4,0,0,0"
+                                        xct:CornerRadiusEffect.CornerRadius="0,0,10,10"
+                                        xct:ShadowEffect.Color="Black"
+                                        xct:ShadowEffect.OffsetX="10"
+                                        xct:ShadowEffect.OffsetY="10"
+                                        xct:ShadowEffect.Opacity="0.5"
+                                        xct:ShadowEffect.Radius="10"
+                                        BackgroundColor="white">
+                                        <Grid RowDefinitions="*,auto,auto" RowSpacing="2">
+                                            <Label
+                                                Grid.Row="0"
+                                                FontFamily="Poppins"
+                                                FontSize="11"
+                                                Text="{Binding Category.NameCategory}"
+                                                TextColor="{StaticResource gray500}" />
+
+                                            <Label
+                                                Grid.Row="1"
+                                                FontAttributes="Bold"
+                                                FontSize="14"
+                                                Text="{Binding Name}"
+                                                TextColor="Black" />
+
+
+                                            <Label
+                                                Grid.Row="2"
+                                                FontSize="14"
+                                                TextColor="Black">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="R$ " />
+                                                        <Span Text="{Binding Price, StringFormat='{0:F2}'}" />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </Grid>
+
+                                    </StackLayout>
+
+                                </Grid>
+
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+
+                    </CollectionView>
+                </StackLayout>
+            </ScrollView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

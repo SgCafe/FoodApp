@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FoodApp.Viewmodels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +13,10 @@ namespace FoodApp.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class EditProductPage : ContentPage
 	{
-		public EditProductPage ()
-		{
-			InitializeComponent ();
-		}
-	}
+        public EditProductPage(Dictionary<string, object> parameters)
+        {
+            InitializeComponent();
+            BindingContext = new EditProductViewmodel(Navigation, parameters);
+        }
+    }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FoodApp.Services;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,6 +12,7 @@ namespace FoodApp
             InitializeComponent();
 
             MainPage = new MainPage();
+            DependencyService.Register<IProductService, ProductService>();
         }
 
         protected override void OnStart()

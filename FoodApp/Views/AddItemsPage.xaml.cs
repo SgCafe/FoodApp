@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FoodApp.Viewmodels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,7 @@ namespace FoodApp.Views
 		public AddItemsPage ()
 		{
 			InitializeComponent ();
-		}
-	}
+            BindingContext = new AddItemsViewmodel(Navigation);
+        }
+    }
 }

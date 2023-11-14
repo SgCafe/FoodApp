@@ -1,12 +1,108 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="FoodApp.Views.EditProductPage">
+<ContentPage
+    x:Class="FoodApp.Views.EditProductPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:effects="clr-namespace:FoodApp.Resources.Effects"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Padding="20">
+            <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                <Button
+                    BackgroundColor="Transparent"
+                    Command="{Binding BackProductPageCommand}"
+                    HorizontalOptions="Start"
+                    ImageSource="back_button.png"
+                    WidthRequest="25" />
+
+                <Label
+                    FontFamily="Poppins"
+                    FontSize="Title"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="Atualize o Item"
+                    TextColor="Black"
+                    VerticalOptions="Center" />
+            </StackLayout>
+
+
+            <Frame
+                Padding="5"
+                xct:ShadowEffect.Color="Black"
+                xct:ShadowEffect.OffsetX="5"
+                xct:ShadowEffect.OffsetY="5"
+                xct:ShadowEffect.Opacity="0.9"
+                xct:ShadowEffect.Radius="10"
+                CornerRadius="10">
+                <Picker
+                    Title="{Binding ParametersReceived.Category.NameCategory}"
+                    Margin="7,0,0,0"
+                    FontSize="18"
+                    ItemDisplayBinding="{Binding NameCategory}"
+                    ItemsSource="{Binding CategoriesList}"
+                    SelectedItem="{Binding CategorySave}"
+                    TextColor="Black"
+                    TitleColor="#A1A1A1">
+                    <Picker.Effects>
+                        <effects:PlainEntry />
+                    </Picker.Effects>
+                </Picker>
+            </Frame>
+
+            <Frame
+                Padding="5"
+                xct:ShadowEffect.Color="Black"
+                xct:ShadowEffect.OffsetX="5"
+                xct:ShadowEffect.OffsetY="5"
+                xct:ShadowEffect.Opacity="0.9"
+                xct:ShadowEffect.Radius="10"
+                CornerRadius="10">
+                <Entry
+                    Margin="7,0,0,0"
+                    FontFamily="Poppins"
+                    FontSize="16"
+                    Placeholder="{Binding ParametersReceived.Name}"
+                    PlaceholderColor="#A1A1A1"
+                    Text="{Binding NameSave}"
+                    TextColor="Black">
+                    <Entry.Effects>
+                        <effects:PlainEntry />
+                    </Entry.Effects>
+                </Entry>
+            </Frame>
+
+            <Frame
+                Padding="5"
+                xct:ShadowEffect.Color="Black"
+                xct:ShadowEffect.OffsetX="5"
+                xct:ShadowEffect.OffsetY="5"
+                xct:ShadowEffect.Opacity="0.9"
+                xct:ShadowEffect.Radius="10"
+                CornerRadius="10">
+                <Entry
+                    Margin="7,0,0,0"
+                    FontFamily="Poppins"
+                    FontSize="16"
+                    Keyboard="Numeric"
+                    Placeholder="{Binding ParametersReceived.Price}"
+                    PlaceholderColor="#A1A1A1"
+                    Text="{Binding PriceSave}"
+                    TextColor="Black">
+                    <Entry.Effects>
+                        <effects:PlainEntry />
+                    </Entry.Effects>
+                </Entry>
+            </Frame>
+
+            <Button
+                Margin="0,10"
+                Command="{Binding UpdateItemsCommand}"
+                CornerRadius="10"
+                FontFamily="Poppins"
+                FontSize="18"
+                HorizontalOptions="Center"
+                Text="Salvar"
+                TextColor="Black" />
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

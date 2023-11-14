@@ -1,12 +1,91 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="FoodApp.Views.ListCategoriesPage">
+<ContentPage
+    x:Class="FoodApp.Views.ListCategoriesPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Converters="clr-namespace:FoodApp.Resources.Converters"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    Background="{StaticResource bgColor}"
+    Shell.NavBarIsVisible="False">
+
+    <ContentPage.Resources>
+        <Converters:ConverterToBgColor x:Key="ConverterToBgColor" />
+    </ContentPage.Resources>
+
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Margin="10,0">
+            <StackLayout
+                Margin="20,20,20,5"
+                Orientation="Horizontal"
+                VerticalOptions="Center">
+                <Label
+                    FontFamily="Poppins"
+                    FontSize="24"
+                    HorizontalOptions="StartAndExpand"
+                    Text="Categorias"
+                    TextColor="Black" />
+
+                <Button
+                    Padding="10,2"
+                    BackgroundColor="{StaticResource bgButton}"
+                    Command="{Binding GoToAddCategoriesCommand}"
+                    CornerRadius="20"
+                    FontSize="22"
+                    HeightRequest="10"
+                    HorizontalOptions="Center"
+                    Text="+"
+                    WidthRequest="42" />
+            </StackLayout>
+
+            <StackLayout>
+                <CollectionView
+                    ItemsSource="{Binding Categories}"
+                    SelectedItem="{Binding SelectCategory}"
+                    SelectionMode="Single">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout
+                            HorizontalItemSpacing="5"
+                            Orientation="Vertical"
+                            Span="3"
+                            VerticalItemSpacing="10" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.EmptyView>
+                        <Label
+                            Padding="20,0"
+                            FontFamily="Poppins"
+                            FontSize="16"
+                            HorizontalOptions="Start"
+                            Text="Nenhuma categoria adicionada"
+                            TextColor="Gray" />
+                    </CollectionView.EmptyView>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid
+                                Padding="0"
+                                xct:CornerRadiusEffect.CornerRadius="8"
+                                BackgroundColor="{Binding NameCategory, Converter={StaticResource ConverterToBgColor}}"
+                                ColumnDefinitions="*,auto"
+                                HorizontalOptions="Center"
+                                RowDefinitions="50,30"
+                                RowSpacing="10">
+                                <Image
+                                    Grid.Row="0"
+                                    Margin="0,5,0,0"
+                                    Source="{Binding Image}" />
+                                <Label
+                                    Grid.Row="1"
+                                    FontFamily="Poppins"
+                                    FontSize="13"
+                                    HorizontalTextAlignment="Center"
+                                    Text="{Binding NameCategory}"
+                                    TextColor="Black" />
+                            </Grid>
+
+
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
